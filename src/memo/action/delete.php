@@ -17,9 +17,11 @@ $database_handler = getDatabaseConnection();
 
 try {
     // メモ削除処理
-    if ($statement = $database_handler->prepare(
-        "DELETE FROM memos WHERE id = :edit_id AND user_id = :user_id"
-    )) {
+    if (
+        $statement = $database_handler->prepare(
+            "DELETE FROM memos WHERE id = :edit_id AND user_id = :user_id"
+        )
+    ) {
         $statement->bindParam(":edit_id", $edit_id);
         $statement->bindParam(":user_id", $user_id);
         $statement->execute();

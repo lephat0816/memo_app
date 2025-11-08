@@ -3,7 +3,8 @@
 /**
  * 空チェック
  */
-function emptyCheck(&$errors, $check_value, $message){
+function emptyCheck(&$errors, $check_value, $message)
+{
     if (empty(trim($check_value))) {
         array_push($errors, $message);
     }
@@ -11,7 +12,8 @@ function emptyCheck(&$errors, $check_value, $message){
 /**
  * 最小文字数チェック
  */
-function stringMinSizeCheck(&$errors, $check_value, $message, $min_size = 8){
+function stringMinSizeCheck(&$errors, $check_value, $message, $min_size = 8)
+{
     if (mb_strlen($check_value) < $min_size) {
         array_push($errors, $message);
     }
@@ -19,7 +21,8 @@ function stringMinSizeCheck(&$errors, $check_value, $message, $min_size = 8){
 /**
  * 最大文字数チェック
  */
-function stringMaxSizeCheck(&$errors, $check_value, $message, $max_size = 255) {
+function stringMaxSizeCheck(&$errors, $check_value, $message, $max_size = 255)
+{
     if ($max_size < mb_strlen($check_value)) {
         array_push($errors, $message);
     }
@@ -27,7 +30,8 @@ function stringMaxSizeCheck(&$errors, $check_value, $message, $max_size = 255) {
 /**
  * メールアドレス形式チェック
  */
-function mailAddressCheck(&$errors, $check_value, $message) {
+function mailAddressCheck(&$errors, $check_value, $message)
+{
     if (filter_var($check_value, FILTER_VALIDATE_EMAIL) == false) {
         array_push($errors, $message);
     }
@@ -35,7 +39,8 @@ function mailAddressCheck(&$errors, $check_value, $message) {
 /**
  * 半角英数字チェック
  */
-function halfAlphanumericCheck(&$errors, $check_value, $message) {
+function halfAlphanumericCheck(&$errors, $check_value, $message)
+{
     if (preg_match("/^[a-zA-Z0-9]+$/", $check_value) == false) {
         array_push($errors, $message);
     }
@@ -43,7 +48,8 @@ function halfAlphanumericCheck(&$errors, $check_value, $message) {
 /**
  * メールアドレス重複チェック
  */
-function mailAddressDuplicationCheck(&$errors, $check_value, $message) {
+function mailAddressDuplicationCheck(&$errors, $check_value, $message)
+{
     $database_handler = getDatabaseConnection();
     if ($statement = $database_handler->prepare('SELECT id FROM users WHERE email = :user_email')) {
         $statement->bindParam(':user_email', $check_value);

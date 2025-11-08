@@ -7,14 +7,16 @@ if (!isset($_SESSION)) {
  * ログインしているかチェックする
  * @return bool
  */
-function isLogin() {
+function isLogin()
+{
     return isset($_SESSION['user']);
 }
 /**
  * ログインしているユーザーの表示用ユーザー名を取得
  * @return string
  */
-function getLoginUserName() {
+function getLoginUserName()
+{
     if (isset($_SESSION['user'])) {
         $name = $_SESSION['user']['name'];
 
@@ -32,6 +34,7 @@ function getLoginUserName() {
  * ログインしているユーザーIDを取得する
  * @return int|null
  */
-function getLoginUserId() {
+function getLoginUserId()
+{
     return $_SESSION['user']['id'] ?? null;
 }

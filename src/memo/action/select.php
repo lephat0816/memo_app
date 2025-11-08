@@ -7,13 +7,15 @@ if (!isLogin()) {
     exit;
 }
 
-$id      = $_GET['id'];        // クリックされたメモID（URLパラメータ）
+$id = $_GET['id'];        // クリックされたメモID（URLパラメータ）
 $user_id = getLoginUserId();   // ログインユーザーID
 
 $database_handler = getDatabaseConnection();
-if ($statement = $database_handler->prepare(
-    "SELECT id, title, content FROM memos WHERE id = :id AND user_id = :user_id"
-)) {
+if (
+    $statement = $database_handler->prepare(
+        "SELECT id, title, content FROM memos WHERE id = :id AND user_id = :user_id"
+    )
+) {
     $statement->bindParam(":id", $id);
     $statement->bindParam(":user_id", $user_id);
     $statement->execute();
@@ -22,8 +24,8 @@ if ($statement = $database_handler->prepare(
 
 // 選択中メモをセッションに保存
 $_SESSION['select_memo'] = [
-    'id'      => $result['id'],
-    'title'   => $result['title'],
+    'id' => $result['id'],
+    'title' => $result['title'],
     'content' => $result['content'],
 ];
 
